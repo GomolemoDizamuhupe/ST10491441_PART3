@@ -1,4 +1,5 @@
-﻿Create database prog_task_1;
+/*Creating db*/
+Create database prog_task_1;
 
 USE [prog_task_1];
 
