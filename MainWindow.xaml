@@ -1,0 +1,561 @@
+﻿<Window x:Class="PART2_POE_.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:PART2_POE_"
+        mc:Ignorable="d"
+        Title="MainWindow" Height="450" Width="800">
+
+    <Grid
+        Background="Black"
+        >
+
+
+        <Grid
+            x:Name="welcome_grid"
+            Visibility="Visible"
+            >
+
+            <Image
+                Source="/logo.png"
+                Width="200"
+                Height="100"
+                Margin="0, -200, 0, 0"
+                />
+
+            <TextBlock
+                Text="Hello! Welcome to the Cybersecurity Awareness Bot. I'm here to help you to stay safe online."
+                VerticalAlignment="Center"
+                HorizontalAlignment="Center"
+                FontSize="12"
+                FontFamily="Cascadia Code"
+                Foreground="LimeGreen"
+                />
+
+            <Button
+                Content="Start ChatBot"
+                FontFamily="Cascadia Code"
+                Width="100"
+                Height="50"
+                Margin="0, 200, 0, 0"
+                Click="start_bot"
+                Foreground="LimeGreen"
+                Background="Black"
+                />
+        </Grid>
+
+
+        <Grid
+            x:Name="username_grid"
+            Visibility="Hidden"
+            >
+
+            <Image
+                Source="/logo.png"
+                Width="200"
+                Height="100"
+                Margin="0, -200, 0, 0"
+                />
+
+            <TextBlock
+                Text="Enter your name: "
+                VerticalAlignment="Center"
+                HorizontalAlignment="Center"
+                FontSize="12"
+                FontFamily="Cascadia Code"
+                Foreground="LimeGreen"
+                Background="Black"
+                />
+
+            <TextBox
+                x:Name="txtUsername"
+                Width="200"
+                Height="50"
+                Margin="0, 150, 100, 0"
+                BorderBrush="LimeGreen"
+                Foreground="LimeGreen"
+                Background="Black"
+                />
+
+            <Button
+                Click="submit_username"
+                FontFamily="Cascadia Code"
+                Content="Submit"
+                Width="100"
+                Height="50"
+                Margin="0, 150, -200, 0"
+                BorderBrush="LimeGreen"
+                Foreground="LimeGreen"
+                Background="Black"
+                />
+        </Grid>
+
+        <!--CHAT BOT GRID-->
+        <Grid
+            x:Name="chatbot_grid"
+            Visibility="Hidden"
+            Background="Black"
+            >
+            <Grid.RowDefinitions>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="3*"/>
+                <RowDefinition Height="0.5*"/>
+            </Grid.RowDefinitions>
+
+            <Image
+            Source="/logo.png"
+            />
+
+            <!--QUIZ GAME BUTTON-->
+            <Button
+                Click="quiz_game"
+                Content="Quiz Game" 
+                FontFamily="Cascadia Code"
+                Width="150"
+                Height="50"
+                Margin="0, 100, 1000, 0"
+                BorderBrush="LimeGreen"
+                Foreground="LimeGreen"
+                Background="Black"
+                />
+
+            <!--VIEW TASK BUTTON-->
+            <Button
+                Click="view_allTask"
+                Content="View Task" 
+                FontFamily="Cascadia Code"
+                Width="150"
+                Height="50"
+                Margin="0, 200, 1000, 0"
+                BorderBrush="LimeGreen"
+                Foreground="LimeGreen"
+                Background="Black" 
+                Grid.RowSpan="2" 
+                VerticalAlignment="Top"
+                />
+            
+            <!--ACTIVITY LOGS BUTTON-->
+            <Button
+                Click="Activity_Logs"
+                FontFamily="Cascadia Code"
+                Width="150"
+                Height="50"
+                Margin="0, 300, 1000, 0"
+                Content="ACTIVITY LOG"
+                BorderBrush="LimeGreen"
+                Foreground="LimeGreen"
+                Background="Black"
+                Grid.RowSpan="3" 
+                VerticalAlignment="Top"
+                />
+
+            <!-- Message List -->
+            <ListView Grid.Row="1" 
+                      ItemsSource="{Binding Messages}" 
+                      Margin="0,0,0,10"
+                      Width="800"
+                        BorderBrush="LimeGreen"
+                        Foreground="LimeGreen"
+                        Background="Black"
+                      >
+                <ListView.View>
+                    <GridView>
+                        <GridViewColumn 
+                            Header="Sender"
+                            Width="200"  
+                            DisplayMemberBinding="{Binding Sender}"
+                            />
+                        <GridViewColumn 
+                            Header="Message" 
+                            Width="400"
+                            >
+                            <GridViewColumn.CellTemplate>
+                                <DataTemplate>
+                                    <TextBlock 
+                                        Text="{Binding Text}"
+                                        FontFamily="Cascadia Code"
+                                        Foreground="{Binding MessageColor}"
+                                        TextWrapping="Wrap"
+                                        MaxWidth="390"
+                                        />
+                                </DataTemplate>
+                            </GridViewColumn.CellTemplate>
+                        </GridViewColumn>
+                        <GridViewColumn 
+                            Header="Time" 
+                            Width="200" 
+                            DisplayMemberBinding="{Binding Time}"
+                            />
+                    </GridView>
+                </ListView.View>
+            </ListView>
+
+            <!-- Input Area -->
+            <Grid Grid.Row="2">
+
+                <TextBox
+                    x:Name="txtUserResponse"
+                    FontFamily="Cascadia Code"
+                    Width="300"
+                    Height="50"
+                    Margin="0, 0, 200, 0"
+                    BorderBrush="LimeGreen"
+                    Foreground="LimeGreen"
+                    Background="Black"
+                    />
+
+                <Button
+                    Content="Send" 
+                    FontFamily="Cascadia Code"
+                    Width="150"
+                    Height="50"
+                    Margin="250, 0, 0, 0"
+                    BorderBrush="LimeGreen"
+                    Foreground="LimeGreen"
+                    Background="Black"
+                    Click="submit_response"
+                    />
+
+                <Button
+                    Content="Exit" 
+                    FontFamily="Cascadia Code"
+                    Width="150"
+                    Height="50"
+                    Margin="700, 0, 0, 0"
+                    Click="Exit_chatbot"
+                    BorderBrush="LimeGreen"
+                    Foreground="LimeGreen"
+                    Background="Black"
+                    />
+            </Grid>
+        </Grid>
+
+        <Grid
+            Visibility="Hidden"
+            x:Name="quiz_grid">
+
+            <Image
+                Source="/logo.png"
+                Width="300"
+                Height="100"
+                Margin="0, 0, 0, 600"
+                />
+
+            <!-- Question counter label -->
+            <TextBlock
+                x:Name="questionTitle"
+                Text="Question:"
+                Margin="0, 0, 250, 100"
+                FontSize="12"
+                Width="120"
+                Height="40"
+                FontFamily="Cascadia Code"
+                Foreground="LimeGreen"
+                />
+
+            <!-- Question text -->
+            <TextBlock
+                x:Name="questionTxt"
+                Margin="200, 0, 0, 100"
+                FontSize="12"
+                Width="320"
+                Height="40"
+                TextWrapping="Wrap"
+                FontFamily="Cascadia Code"
+                Foreground="LimeGreen"
+                />
+
+            <!-- Option A -->
+            <Button
+                x:Name="btnA"
+                Content="A"
+                FontFamily="Cascadia Code"
+                Width="30"
+                Height="30"
+                Margin="0, 50, 300, 50"
+                BorderBrush="LimeGreen"
+                Foreground="LimeGreen"
+                Background="Black"
+                Click="btnA_Click"
+                />
+
+            <TextBlock
+                x:Name="questionA"
+                Margin="100, 50, 0, 50"
+                FontSize="12"
+                Width="350"
+                Height="30"
+                TextWrapping="Wrap"
+                FontFamily="Cascadia Code"
+                Foreground="LimeGreen"
+                />
+
+            <!-- Option B -->
+            <Button
+                x:Name="btnB"
+                Content="B"
+                FontFamily="Cascadia Code"
+                Width="30"
+                Height="30"
+                Margin="0, 150, 300, 50"
+                BorderBrush="LimeGreen"
+                Foreground="LimeGreen"
+                Background="Black"
+                Click="btnB_Click"
+                />
+
+            <TextBlock
+                x:Name="questionB"
+                Margin="100, 150, 0, 50"
+                FontSize="12"
+                Width="350"
+                Height="30"
+                TextWrapping="Wrap"
+                FontFamily="Cascadia Code"
+                Foreground="LimeGreen"
+                />
+
+            <!-- Option C -->
+            <Button
+                x:Name="btnC"
+                Content="C"
+                FontFamily="Cascadia Code"
+                Width="30"
+                Height="30"
+                Margin="0, 250, 300, 50"
+                BorderBrush="LimeGreen"
+                Foreground="LimeGreen"
+                Background="Black"
+                Click="btnC_Click"
+                />
+
+            <TextBlock
+                x:Name="questionC"
+                Margin="100, 250, 0, 50"
+                FontSize="12"
+                Width="350"
+                Height="30"
+                TextWrapping="Wrap"
+                FontFamily="Cascadia Code"
+                Foreground="LimeGreen"
+                />
+
+            <!-- Option D -->
+            <Button
+                x:Name="btnD"
+                Content="D"
+                FontFamily="Cascadia Code"
+                Width="30"
+                Height="30"
+                Margin="0, 350, 300, 50"
+                BorderBrush="LimeGreen"
+                Foreground="LimeGreen"
+                Background="Black"
+                Click="btnD_Click"
+                />
+
+            <TextBlock
+                x:Name="questionD"
+                Margin="100, 350, 0, 50"
+                FontSize="12"
+                Width="350"
+                Height="30"
+                TextWrapping="Wrap"
+                FontFamily="Cascadia Code"
+                Foreground="LimeGreen"
+                />
+
+            <!-- Keyword input (hidden by default, shown for typed-answer questions) -->
+            <TextBox
+                x:Name="txtKeyword"
+                Margin="0, 350, 0, 0"
+                Width="350"
+                Height="30"
+                VerticalAlignment="Top"
+                FontFamily="Cascadia Code"
+                FontSize="12"
+                Foreground="LimeGreen"
+                Background="Black"
+                BorderBrush="LimeGreen"
+                CaretBrush="LimeGreen"
+                Visibility="Collapsed"
+                />
+
+
+
+            <!-- Submit button for keyword questions (hidden by default) -->
+            <Button
+            x:Name="btnSubmit"
+            Content="Submit"
+            FontFamily="Cascadia Code"
+            Width="100"
+            Height="30"            
+            Margin="0, 400, 0, 0"
+            VerticalAlignment="Top"
+            BorderBrush="LimeGreen"
+            Foreground="LimeGreen"
+            Background="Black"
+            Click="btnSubmit_Click"
+            Visibility="Collapsed"
+            />
+
+            <!-- Feedback text -->
+            <TextBlock
+            x:Name="feedback"
+            Margin="0, 550, 150, 0"
+            FontSize="12"
+            Width="350"
+            Height="80"
+            TextWrapping="Wrap"
+            VerticalAlignment="Top"
+            FontFamily="Cascadia Code"
+            Foreground="LimeGreen"
+            />
+
+            <!-- Next button (hidden until an answer is submitted) -->
+            <Button
+            x:Name="btnNext"
+            Content="Next >"
+            FontFamily="Cascadia Code"
+            Width="100"
+            Height="30"
+            Margin="350, 550, 0, 0"
+            VerticalAlignment="Top"
+            BorderBrush="LimeGreen"
+            Foreground="LimeGreen"
+            Background="Black"
+            Click="btnNext_Click"
+            />
+
+            <Button
+            x:Name="btnExit"
+            Content="Exit"
+            FontFamily="Cascadia Code"
+            Width="100"
+            Height="30"
+            Margin="350, 550, 0, 0"
+            VerticalAlignment="Top"
+            BorderBrush="LimeGreen"
+            Foreground="LimeGreen"
+            Background="Black"
+            Visibility="Collapsed"
+            Click="btnExit_Click"/>
+        </Grid>
+
+
+        <!--view tasks-->
+        <!--Grid page to view all the tasks-->
+        <Grid
+            x:Name="viewTask_grid"
+            Visibility="Hidden"
+            >
+
+            <Image
+                Source="/logo.png"
+                Width="200"
+                Height="100"
+                Margin="0, 0, 0, 350"
+                />
+
+            <TextBlock
+                Text="YOUR TASKS :"
+                VerticalAlignment="Center"
+                HorizontalAlignment="Center"
+                FontSize="12"
+                Margin="0, 0, 650, 250"
+                FontFamily="Cascadia Code"
+                Foreground="LimeGreen"
+                Background="Black"
+                x:Name="task_title"
+                />
+
+            <!-- Task list: bound to TaskList (exposed on MainWindow), which wraps
+                 manage_tasks.Tasks. Double-click a row to toggle done/delete it. -->
+            <ListView 
+                Height="200"
+                ItemsSource="{Binding TaskList}" 
+                Margin="0,0,0,10"
+                Width="800"
+                BorderBrush="LimeGreen"
+                Foreground="LimeGreen"
+                Background="Black"
+                x:Name="view_task"
+                MouseDoubleClick="manage_task"
+                >
+                <ListView.View>
+                    <GridView>
+                        <!--  TASK ID  -->
+                        <GridViewColumn 
+                            Header="TASK NO"
+                            Width="200"  
+                            DisplayMemberBinding="{Binding task_num}"
+                            />
+                        <!--  TITLE  -->
+                        <GridViewColumn 
+                            Header="TITLE"
+                            Width="100"  
+                            DisplayMemberBinding="{Binding task_title}"
+                            />
+
+                        <!--  DESCRIPTION  -->
+                        <GridViewColumn 
+                            Header="DESCRIPTION" 
+                            Width="100"
+                            >
+                            <GridViewColumn.CellTemplate>
+                                <DataTemplate>
+                                    <TextBlock 
+                                        Text="{Binding task_description}"
+                                        FontFamily="Cascadia Code"
+                                        Foreground="{Binding MessageColor}"
+                                        TextWrapping="Wrap"
+                                        MaxWidth="390"
+                                        />
+                                </DataTemplate>
+                            </GridViewColumn.CellTemplate>
+                        </GridViewColumn>
+                        <!--  DATE  -->
+                        <GridViewColumn 
+                            Header="DATE"
+                            Width="100"  
+                            DisplayMemberBinding="{Binding task_date}"
+                            />
+                        <!--  STATUS  -->
+                        <GridViewColumn 
+                            Header="STATUS" 
+                            Width="100" 
+                            DisplayMemberBinding="{Binding task_status}"
+                            />
+                    </GridView>
+                </ListView.View>
+            </ListView>
+            
+            <!--Instractions-->
+            <TextBlock
+                Text="NB: DOUBLE TAP the task to 'Complete' it and DOUBLE TAP it again to 'Delete'"
+                Margin="0, 350, 0, 0"
+                FontFamily="Cascadia Code"
+                Foreground="LimeGreen"
+                VerticalAlignment="Center"
+                HorizontalAlignment="Center"
+                />
+
+
+
+            <Button
+                Width="150"
+                Height="50"
+                BorderBrush="LimeGreen"
+                Foreground="LimeGreen"
+                Background="Black"
+                FontFamily="Cascadia Code"
+                Content="Back To Chatbot"
+                Margin="0, 450, 0, 0"
+                Click="back_to_chats"
+                />
+        </Grid>
+
+
+    </Grid>
+</Window>
