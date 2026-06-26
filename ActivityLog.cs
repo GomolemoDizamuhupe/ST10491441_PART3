@@ -8,7 +8,7 @@ namespace PART2_POE_
     // Provides methods to retrieve recent or all entries for display.
     public class ActivityLog
     {
-        //Internal storage
+        //Using List as Internal storage
         private readonly List<string> _entries = new List<string>();
         public int Count => _entries.Count;
 
